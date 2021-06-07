@@ -35,9 +35,10 @@ class _LogItem extends StatelessWidget {
         child: InkWell(
           onTap: () => null,
           borderRadius: BorderRadius.circular(4),
-          child: Center(
-            child: logTile(context, state, fileName),
-          ),
+          child: //Center(
+            //child:
+            logTile(context, state, fileName),
+          //),
         ),
       );
     });
@@ -63,7 +64,7 @@ class _LogItem extends StatelessWidget {
             children: [
               // Folder Icon
               Container(
-                alignment: Alignment.center,
+                //alignment: Alignment.center,
                 child: Icon(
                   Icons.folder,
                   color: Theme.of(context).accentColor,
