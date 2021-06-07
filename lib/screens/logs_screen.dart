@@ -13,6 +13,7 @@ import '../widgets/sensor_item.dart';
 
 class LogsScreen extends StatelessWidget {
   final ArduinoRepository arduinoRepo;
+
   LogsScreen(this.arduinoRepo);
 
   refreshPage() {
@@ -35,6 +36,7 @@ class LogsScreen extends StatelessWidget {
   }
 
   Widget pageContent(BuildContext context) {
+    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -67,7 +69,7 @@ class LogsScreen extends StatelessWidget {
                 if (state is LoadingFiles) {
                   //Loading Spinner
                   return Padding(
-                    padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                    padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
                     child: Container(
                       // color: Colors.blue[50],
                       width: MediaQuery.of(context).size.width * 0.20,
@@ -84,15 +86,11 @@ class LogsScreen extends StatelessWidget {
                 if (state is Files) {
                   return Container(
                     // color: Colors.red[50],
-                    height: MediaQuery.of(context).size.height * 0.53,
-                    width: MediaQuery.of(context).size.width * 0.95,
+                    height: MediaQuery.of(context).size.height * 0.53, //list area range on screen (height)
+                    width: MediaQuery.of(context).size.width * (isLandscape? .902 : 1.05), //list area range on screen (width)
                     child: GridView(
                       padding: EdgeInsets.only(top: 10),
-                      children: state.fileNames
-                          .map(
-                            (fileName) => new LogItem(fileName, arduinoRepo),
-                          )
-                          .toList(),
+                      children: state.fileNames.map((fileName) => new LogItem(fileName, arduinoRepo),).toList(),
                       gridDelegate: Platform.isWindows
                           ? SliverGridDelegateWithMaxCrossAxisExtent(
                               childAspectRatio: 5,
