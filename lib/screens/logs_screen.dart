@@ -86,7 +86,7 @@ class LogsScreen extends StatelessWidget {
                 if (state is Files) {
                   return Container(
                     // color: Colors.red[50],
-                    height: MediaQuery.of(context).size.height * 0.53, //list area range on screen (height)
+                    height: MediaQuery.of(context).size.height * (0.53), //list area range on screen (height)
                     width: MediaQuery.of(context).size.width * (isLandscape? .902 : 1.05), //list area range on screen (width)
                     child: GridView(
                       padding: EdgeInsets.only(top: 10),
@@ -103,8 +103,7 @@ class LogsScreen extends StatelessWidget {
                               childAspectRatio: 5.5,
                               crossAxisSpacing: 10,
                               mainAxisSpacing: 5,
-                              maxCrossAxisExtent:
-                                  MediaQuery.of(context).size.width * 1,
+                              maxCrossAxisExtent: MediaQuery.of(context).size.width * 1.0,
                             ),
                     ),
                   );

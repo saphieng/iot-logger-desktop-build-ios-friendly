@@ -26,7 +26,7 @@ class ReadingsScreen extends StatelessWidget {
     final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
       children: [
         Column(
@@ -97,8 +97,7 @@ class ReadingsScreen extends StatelessWidget {
                               childAspectRatio: 5.5,
                               crossAxisSpacing: 10,
                               mainAxisSpacing: 5,
-                              maxCrossAxisExtent:
-                                  MediaQuery.of(context).size.width * 1,
+                              maxCrossAxisExtent: MediaQuery.of(context).size.width * 1,
                             ),
                     ),
                   );

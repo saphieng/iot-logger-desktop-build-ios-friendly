@@ -43,6 +43,7 @@ class GraphScreen extends StatelessWidget {
           child: Align(
             alignment: Alignment.topLeft,
             child: Material(
+              elevation: 20,
               type: MaterialType.transparency,
               child: BackButton(
                 onPressed: () => {

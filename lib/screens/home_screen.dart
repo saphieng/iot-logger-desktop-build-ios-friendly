@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
         content: Container(
           margin: (Platform.isIOS ? EdgeInsets.only(bottom: 5.0) : null),
           height: (Platform.isIOS ? MediaQuery.of(context).size.height * (isLandscape? 0.6 : 0.5) + (isLandscape ? 112 : 290) :
-                                    MediaQuery.of(context).size.height * (isLandscape? 0.6 : 0.5) + (isLandscape ? 95 : 262)),
+                                    MediaQuery.of(context).size.height * (isLandscape? 0.6 : 0.5) + (isLandscape ? 95 : 256)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,

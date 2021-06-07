@@ -63,6 +63,7 @@ class Layout extends StatelessWidget {
             child: Align(
               alignment: Alignment.topLeft,
               child: Material(
+                elevation: 20,
                 type: MaterialType.button,
                 color: Colors.transparent,
                 child: BackButton(
