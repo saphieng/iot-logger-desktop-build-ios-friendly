@@ -14,20 +14,18 @@ class SettingsScreen extends StatelessWidget {
         content: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
-              child: Text(
-                'Settings',
-                style: Theme.of(context).textTheme.headline1,
-              ),
+            Text(
+              'Settings',
+              style: Theme.of(context).textTheme.headline1,
             ),
             BlocBuilder<SettingsCubit, SettingsState>(
               builder: (_, state) {
                 if (state is Loaded) {
                   return Container(
                     // color: Colors.blue[50],
-                    height: MediaQuery.of(context).size.height * 0.75,
-                    width: MediaQuery.of(context).size.width * 0.4,
+                    padding: EdgeInsets.fromLTRB(0, 10, 0,0),
+                    height: MediaQuery.of(context).size.height * 0.65,
+                    width: MediaQuery.of(context).size.width * 0.91,
                     child: ListView(
                       padding: EdgeInsets.all(0),
                       children: [

@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:iot_logger/cubits/log_download_cubit/log_download_cubit.dart';
 import 'package:iot_logger/services/arduino_repository.dart';
 import 'package:iot_logger/shared/rive_animation.dart';
+import 'dart:io';
 
 class LogItem extends StatelessWidget {
   final String fileName;
@@ -42,8 +43,11 @@ class _LogItem extends StatelessWidget {
     });
   }
 
-  Widget logTile(
-      BuildContext context, LogDownloadState state, String fileName) {
+  Widget logTile(BuildContext context, LogDownloadState state, String fileName) {
+
+    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+
+    var theWidth = MediaQuery.of(context).size.width * (isLandscape ? 0.4 : 0.8);
     if (state is LogLoaded) {
       // When file is loaded but not downloaded (Initial State)
       return GestureDetector(
@@ -51,7 +55,7 @@ class _LogItem extends StatelessWidget {
           context.read<LogDownloadCubit>().downloadFile(fileName);
         },
         child: Container(
-          width: MediaQuery.of(context).size.width * 0.8,
+          width: theWidth,
           alignment: Alignment.center,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -111,7 +115,7 @@ class _LogItem extends StatelessWidget {
                   // Loading Animation
                   Container(
                     width: MediaQuery.of(context).size.width * 0.03,
-                    height: MediaQuery.of(context).size.width * 0.03,
+                    height: MediaQuery.of(context).size.height * 0.03,
                     alignment: Alignment.center,
                     child: RiveAnimation(),
                   ),
@@ -125,13 +129,12 @@ class _LogItem extends StatelessWidget {
       //When file is downloaded
       return GestureDetector(
         onTapDown: (TapDownDetails details) {
-          Navigator.of(context)
-              .pushNamed('/graph-reading', arguments: {'fileName': fileName});
+          Navigator.of(context).pushNamed('/graph-reading', arguments: {'fileName': fileName});
         },
         child: Container(
           // color: Colors.blue,
           child: Container(
-            width: MediaQuery.of(context).size.width * 0.8,
+            width: theWidth,
             alignment: Alignment.center,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

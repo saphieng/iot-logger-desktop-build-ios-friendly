@@ -17,8 +17,8 @@ class SensorScreen extends StatelessWidget {
     final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
 
     double cardWidth = MediaQuery.of(context).size.width * (isLandscape ? 0.6 : 0.5 );
-    double cardHeight = MediaQuery.of(context).size.height * (isLandscape ? 0.3 : 0.2) ;
-    double iconSize = MediaQuery.of(context).size.height * (isLandscape ? 0.2 : 0.1);
+    double cardHeight = MediaQuery.of(context).size.height * (isLandscape ? 0.23 : 0.2) ;
+    double iconSize = MediaQuery.of(context).size.height * (isLandscape ? 0.185 : 0.1);
 
     return Scaffold(
       body: Layout(

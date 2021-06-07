@@ -13,8 +13,7 @@ class ReadingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
     return Layout(
       content: isLandscape
           ? SingleChildScrollView(child: pageContent(context, isLandscape))
@@ -23,12 +22,23 @@ class ReadingsScreen extends StatelessWidget {
   }
 
   Widget pageContent(BuildContext context, bool isLandscape) {
+
+    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
       children: [
         Column(
+
           children: [
-            SensorItem(),
+            Container(
+                //alignment: Alignment.center,
+                height: MediaQuery.of(context).size.height * (isLandscape ? 0.25 : 0.15),
+                width: MediaQuery.of(context).size.width * (isLandscape? 10 : 4),
+                child: SensorItem(),
+                //margin: isLandscape ? EdgeInsets.symmetric(horizontal: 80.0, vertical: 10.0): EdgeInsets.symmetric(horizontal: 38.0, vertical: 20.0),
+            ),
             BlocBuilder<SensorReadingCubit, SensorReadingState>(
               builder: (_, state) {
                 if (state is Loaded) {

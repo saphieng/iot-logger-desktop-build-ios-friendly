@@ -20,10 +20,8 @@ class Layout extends StatelessWidget {
             alignment: Alignment.center,
             height:
                 MediaQuery.of(context).size.height * (isLandscape ? 0.1 : 0.15),
-            child: SvgPicture.asset(
-              'assets/svgs/saphi-logo-white-text.svg',
-              width:
-                  MediaQuery.of(context).size.height * (isLandscape ? 0.25 : 0.15),
+            child: SvgPicture.asset('assets/svgs/saphi-logo-white-text.svg',
+                                    width: MediaQuery.of(context).size.height * (isLandscape ? 0.25 : 0.15),
             ),
           ),
         ],
@@ -31,9 +29,8 @@ class Layout extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+  Widget build(BuildContext context){
+    //final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
     return Stack(
       children: [
         // Background
@@ -69,12 +66,11 @@ class Layout extends StatelessWidget {
                 type: MaterialType.button,
                 color: Colors.transparent,
                 child: BackButton(
-                  onPressed: () => {
-                    if (ModalRoute.of(context).settings.name == "/readings")
-                      {
-                        BlocProvider.of<SensorReadingCubit>(context)
-                            .closeTimer()
-                      },
+                  onPressed: ()  => {
+                    // if (ModalRoute.of(context).settings.name == "/readings")
+                    //   {
+                    //      BlocProvider.of<SensorReadingCubit>(context).closeTimer(),
+                    //   },
                     Navigator.pop(context),
                   },
                   color: Colors.white,

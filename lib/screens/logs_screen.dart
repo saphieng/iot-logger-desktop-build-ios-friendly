@@ -37,8 +37,14 @@ class LogsScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
+
           children: [
-            SensorItem(),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SensorItem(),
+              ],
+            ),
             SubCard(
               content: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -48,7 +54,7 @@ class LogsScreen extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 14,
-                      )),
+                      ),),
                   const SizedBox(width: 5),
                   SvgPicture.asset('assets/svgs/toggle-arrow.svg'),
                 ],

@@ -27,12 +27,11 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Layout(
         content: Container(
           margin: (Platform.isIOS ? EdgeInsets.only(bottom: 5.0) : null),
-          height: (Platform.isIOS ? 
-                                    MediaQuery.of(context).size.height * (isLandscape? 0.6 : 0.5) + (isLandscape ? 112 : 290) : 
+          height: (Platform.isIOS ? MediaQuery.of(context).size.height * (isLandscape? 0.6 : 0.5) + (isLandscape ? 112 : 290) :
                                     MediaQuery.of(context).size.height * (isLandscape? 0.6 : 0.5) + (isLandscape ? 95 : 262)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SensorItem(),
               SizedBox(height: (Platform.isIOS ? MediaQuery.of(context).size.height * (isLandscape ?  0.2: 0.20) : MediaQuery.of(context).size.height * (isLandscape ?  0.2: 0.30)),),

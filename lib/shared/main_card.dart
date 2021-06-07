@@ -10,8 +10,7 @@ class MainCard extends StatelessWidget {
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Container(
-      width:
-          MediaQuery.of(context).size.width * (isLandscape ? 0.12 : 1),
+      width: MediaQuery.of(context).size.width * (isLandscape ? 0.02 : 1),
       height: (MediaQuery.of(context).size.height * (isLandscape ? 0.22 : 0.15)),
       child: Card(
         shape: RoundedRectangleBorder(
