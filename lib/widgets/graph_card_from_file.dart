@@ -10,8 +10,9 @@ class GraphCardFromFile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GraphCubit, GraphState>(
-      bloc: GraphCubit()..loadGraph(fileName),
+      // bloc:
       builder: (_, state) {
+        GraphCubit()..loadGraph(fileName);
         if (state is Loaded) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -21,8 +22,7 @@ class GraphCardFromFile extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.9,
                 height: MediaQuery.of(context).size.height * 0.35,
                 alignment: Alignment.center,
-                padding: EdgeInsets.fromLTRB(
-                    0, MediaQuery.of(context).size.height * 0.02, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.height * 0.02, 0, 0),
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(
                     Radius.circular(18),
@@ -67,14 +67,8 @@ class GraphCardFromFile extends StatelessWidget {
                       "",
                       style: TextStyle(color: Colors.white),
                     )),
-                    DataColumn(
-                        label: Text("Min",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white))),
-                    DataColumn(
-                        label: Text("Max",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white)))
+                    DataColumn(label: Text("Min", textAlign: TextAlign.center, style: TextStyle(color: Colors.white))),
+                    DataColumn(label: Text("Max", textAlign: TextAlign.center, style: TextStyle(color: Colors.white)))
                   ],
                   rows: [
                     DataRow(
@@ -220,8 +214,7 @@ class GraphCardFromFile extends StatelessWidget {
         bottomTitles: SideTitles(
           showTitles: true,
           reservedSize: 22,
-          getTextStyles: (value) =>
-              const TextStyle(color: Color(0xffffffff), fontSize: 10),
+          getTextStyles: (value) => const TextStyle(color: Color(0xffffffff), fontSize: 10),
           getTitles: (value) {
             if (((value % 3 == 0)) || value == 0) {
               return value.toInt().toString();

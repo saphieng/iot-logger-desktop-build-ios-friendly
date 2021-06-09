@@ -1,6 +1,6 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iot_logger/cubits/settings_cubit/settings_cubit.dart';
@@ -9,7 +9,10 @@ import '../shared/layout.dart';
 class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    PortraitLock(context);
+    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Layout(
         content: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -23,7 +26,7 @@ class SettingsScreen extends StatelessWidget {
                 if (state is Loaded) {
                   return Container(
                     // color: Colors.blue[50],
-                    padding: EdgeInsets.fromLTRB(0, 10, 0,0),
+                    padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                     height: MediaQuery.of(context).size.height * 0.65,
                     width: MediaQuery.of(context).size.width * 0.91,
                     child: ListView(
@@ -62,46 +65,33 @@ class SettingsScreen extends StatelessWidget {
                                   ),
                                   title: Text(
                                     "Sensor Time",
-                                    style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Theme.of(context).accentColor),
+                                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: Theme.of(context).accentColor),
                                   ),
                                   children: <Widget>[
                                     ListTile(
                                       title: Text(
                                         "Sensor's Time: ",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                       ),
                                       trailing: Text(
                                         "${state.time}",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     ListTile(
                                       title: RaisedButton(
                                         shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
+                                          borderRadius: BorderRadius.circular(10.0),
                                         ),
                                         onPressed: () => {
-                                          context
-                                              .read<SettingsCubit>().setArduinoTime(),
+                                          context.read<SettingsCubit>().setArduinoTime(),
                                         },
                                         child: Text(
                                           'Set Time',
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w700,
-                                              fontFamily: 'Montserrat'),
+                                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, fontFamily: 'Montserrat'),
                                         ),
                                         elevation: 3,
-                                        textColor:
-                                            Theme.of(context).backgroundColor,
+                                        textColor: Theme.of(context).backgroundColor,
                                       ),
                                     ),
                                   ],
@@ -140,92 +130,68 @@ class SettingsScreen extends StatelessWidget {
                                   ),
                                   title: Text(
                                     "Wifi Details",
-                                    style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Theme.of(context).accentColor),
+                                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: Theme.of(context).accentColor),
                                   ),
                                   children: <Widget>[
                                     ListTile(
                                       title: Text(
                                         "Wifi SSID: ",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                       ),
                                       trailing: Text(
                                         "${state.ssid}",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     ListTile(
                                       title: Text(
                                         "Wifi Password: ",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                       ),
                                       trailing: Text(
                                         "${state.password}",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     ListTile(
                                       title: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           RaisedButton(
                                             shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
+                                              borderRadius: BorderRadius.circular(10.0),
                                             ),
                                             onPressed: () => {
                                               showDialog(
                                                 context: context,
-                                                builder: (_) =>
-                                                    SetWifiSSID(context, state),
+                                                builder: (_) => SetWifiSSID(context, state),
                                                 barrierDismissible: true,
                                               ),
                                             },
                                             child: Text(
                                               "Set SSID",
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w700,
-                                                  fontFamily: 'Montserrat'),
+                                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, fontFamily: 'Montserrat'),
                                             ),
                                             elevation: 3,
-                                            textColor: Theme.of(context)
-                                                .backgroundColor,
+                                            textColor: Theme.of(context).backgroundColor,
                                           ),
                                           RaisedButton(
                                             shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
+                                              borderRadius: BorderRadius.circular(10.0),
                                             ),
                                             onPressed: () => {
                                               showDialog(
                                                 context: context,
-                                                builder: (_) => SetWifiPassword(
-                                                    context, state),
+                                                builder: (_) => SetWifiPassword(context, state),
                                                 barrierDismissible: true,
                                               ),
                                             },
                                             child: Text(
                                               'Set Password',
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w700,
-                                                  fontFamily: 'Montserrat'),
+                                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, fontFamily: 'Montserrat'),
                                             ),
                                             elevation: 3,
-                                            textColor: Theme.of(context)
-                                                .backgroundColor,
+                                            textColor: Theme.of(context).backgroundColor,
                                           ),
                                         ],
                                       ),
@@ -266,50 +232,31 @@ class SettingsScreen extends StatelessWidget {
                                   ),
                                   title: Text(
                                     "File Logging Period",
-                                    style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Theme.of(context).accentColor),
+                                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: Theme.of(context).accentColor),
                                   ),
                                   children: <Widget>[
                                     ListTile(
                                       title: Text(
                                         "Logging Period: ",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                       ),
                                       trailing: Text(
                                         "${state.loggingPeriod}",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     ListTile(
                                       title: RaisedButton(
                                         shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
+                                          borderRadius: BorderRadius.circular(10.0),
                                         ),
-                                        onPressed: () => {
-                                          showDialog(
-                                              context: context,
-                                              builder: (_) =>
-                                                  SetLoggingPeriodDialog(
-                                                      context, state),
-                                              barrierDismissible: true)
-                                        },
+                                        onPressed: () => {showDialog(context: context, builder: (_) => SetLoggingPeriodDialog(context, state), barrierDismissible: true)},
                                         child: Text(
                                           'Set Logging Period',
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w700,
-                                              fontFamily: 'Montserrat'),
+                                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, fontFamily: 'Montserrat'),
                                         ),
                                         elevation: 3,
-                                        textColor:
-                                            Theme.of(context).backgroundColor,
+                                        textColor: Theme.of(context).backgroundColor,
                                       ),
                                     ),
                                   ],
@@ -347,117 +294,85 @@ class SettingsScreen extends StatelessWidget {
                                   ),
                                   title: Text(
                                     "Other",
-                                    style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Theme.of(context).accentColor),
+                                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: Theme.of(context).accentColor),
                                   ),
                                   children: <Widget>[
                                     ListTile(
                                       title: Text(
                                         "Battery Voltage: ",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                       ),
                                       trailing: Text(
                                         "${state.batteryVoltage}",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     ListTile(
                                       title: Text(
                                         "Battery ADC Reading: ",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                       ),
                                       trailing: Text(
                                         "${state.batteryADC}",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     ListTile(
                                       title: Text(
                                         "Used Storage: ",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                       ),
                                       trailing: Text(
                                         "${state.usedSpace} B",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     ListTile(
                                       title: Text(
                                         "Remaining Storage:",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                       ),
                                       trailing: Text(
                                         "${state.remainingSpace} B",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     if (!Platform.isWindows)
                                       ListTile(
                                         title: Text(
                                           "Build Version ",
-                                          style: TextStyle(
-                                              fontSize: 18.0,
-                                              fontWeight: FontWeight.bold),
+                                          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                         ),
                                         trailing: Text(
                                           "${state.version}",
-                                          style: TextStyle(
-                                              fontSize: 18.0,
-                                              fontWeight: FontWeight.bold),
+                                          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                         ),
                                       ),
                                     if (!Platform.isWindows)
                                       ListTile(
                                         title: Text(
                                           "Build Number ",
-                                          style: TextStyle(
-                                              fontSize: 18.0,
-                                              fontWeight: FontWeight.bold),
+                                          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                         ),
                                         trailing: Text(
                                           "${state.buildNumber}",
-                                          style: TextStyle(
-                                              fontSize: 18.0,
-                                              fontWeight: FontWeight.bold),
+                                          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                         ),
                                       ),
                                     ListTile(
                                       title: RaisedButton(
                                         shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
+                                          borderRadius: BorderRadius.circular(10.0),
                                         ),
                                         onPressed: () => {
                                           refreshOtherSetting(context),
                                         },
                                         child: Text(
                                           'Refresh',
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w700,
-                                              fontFamily: 'Montserrat'),
+                                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, fontFamily: 'Montserrat'),
                                         ),
                                         elevation: 3,
-                                        textColor:
-                                            Theme.of(context).backgroundColor,
+                                        textColor: Theme.of(context).backgroundColor,
                                       ),
                                     ),
                                   ],
@@ -496,53 +411,50 @@ class SettingsScreen extends StatelessWidget {
 
 // ignore: non_constant_identifier_names
 Widget SetLoggingPeriodDialog(BuildContext context, state) {
+  PortraitLock(context);
   int loggingPeriod;
   bool loggingPeriodisInt = false;
+  final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
 
   return Dialog(
+    //clipBehavior: Clip.hardEdge,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(28.0),
     ),
     child: Container(
-      height: MediaQuery.of(context).size.height * 0.30,
+      height: MediaQuery.of(context).size.height * (isLandscape ? 0.50 : 0.30),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-            child: Text(
-              "Set Logging Period",
-            ),
+          Text(
+            "Set Logging Period",
           ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child: TextField(
-              style: TextStyle(
-                fontSize: 20.0,
-                color: loggingPeriodisInt ? Colors.red : Colors.black,
-              ),
-              maxLines: 1,
-              textAlignVertical: TextAlignVertical.top,
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                hintText: '${state.loggingPeriod}',
-              ),
-              onChanged: (String value) {
-                // print("Checking");
-                if (int.tryParse(value) != null) {
-                  // print("pass");
-                  loggingPeriod = int.parse(value);
-
-                  loggingPeriodisInt = true;
-                } else {
-                  loggingPeriodisInt = false;
-                }
-              },
-              keyboardType: TextInputType.numberWithOptions(decimal: false),
+          TextField(
+            style: TextStyle(
+              fontSize: 20.0,
+              color: loggingPeriodisInt ? Colors.red : Colors.black,
             ),
+            maxLines: 1,
+            textAlignVertical: TextAlignVertical.top,
+            textAlign: TextAlign.center,
+            decoration: InputDecoration(
+              hintText: '${state.loggingPeriod}',
+            ),
+            onChanged: (String value) {
+              // print("Checking");
+              if (int.tryParse(value) != null) {
+                // print("pass");
+                loggingPeriod = int.parse(value);
+
+                loggingPeriodisInt = true;
+              } else {
+                loggingPeriodisInt = false;
+              }
+            },
+            keyboardType: TextInputType.numberWithOptions(decimal: false),
           ),
           Container(
-            height: MediaQuery.of(context).size.height * 0.05,
+            height: MediaQuery.of(context).size.height * (isLandscape ? 0.06 : 0.05),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -560,9 +472,7 @@ Widget SetLoggingPeriodDialog(BuildContext context, state) {
                   onPressed: () => {
                     if (loggingPeriodisInt)
                       {
-                        context
-                            .read<SettingsCubit>()
-                            .setLoggingPeriod(loggingPeriod),
+                        context.read<SettingsCubit>().setLoggingPeriod(loggingPeriod),
                         Navigator.pop(context),
                       },
                   },
@@ -578,42 +488,37 @@ Widget SetLoggingPeriodDialog(BuildContext context, state) {
 
 // ignore: non_constant_identifier_names
 Widget SetWifiSSID(BuildContext context, state) {
+  PortraitLock(context);
   String ssid;
-
+  final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
   return Dialog(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(28.0),
     ),
     child: Container(
-      height: MediaQuery.of(context).size.height * 0.20,
+      height: MediaQuery.of(context).size.height * (isLandscape ? 0.40 : 0.20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-            child: Text(
-              "Set Wifi SSID",
-            ),
+          Text(
+            "Set Wifi SSID",
           ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child: TextField(
-              style: TextStyle(
-                fontSize: 20.0,
-              ),
-              maxLines: 1,
-              textAlignVertical: TextAlignVertical.top,
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                hintText: '${state.ssid}',
-              ),
-              onChanged: (String value) {
-                ssid = value;
-              },
+          TextField(
+            style: TextStyle(
+              fontSize: 20.0,
             ),
+            maxLines: 1,
+            textAlignVertical: TextAlignVertical.top,
+            textAlign: TextAlign.center,
+            decoration: InputDecoration(
+              hintText: '${state.ssid}',
+            ),
+            onChanged: (String value) {
+              ssid = value;
+            },
           ),
           Container(
-            height: MediaQuery.of(context).size.height * 0.05,
+            height: MediaQuery.of(context).size.height * (isLandscape ? 0.06 : 0.05),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -644,42 +549,37 @@ Widget SetWifiSSID(BuildContext context, state) {
 
 // ignore: non_constant_identifier_names
 Widget SetWifiPassword(BuildContext context, state) {
+  PortraitLock(context);
   String password;
-
+  final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
   return Dialog(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(28.0),
     ),
     child: Container(
-      height: MediaQuery.of(context).size.height * 0.20,
+      height: MediaQuery.of(context).size.height * (isLandscape ? 0.40 : 0.20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-            child: Text(
-              "Set Wifi Password",
-            ),
+          Text(
+            "Set Wifi Password",
           ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child: TextField(
-              style: TextStyle(
-                fontSize: 20.0,
-              ),
-              maxLines: 1,
-              textAlignVertical: TextAlignVertical.top,
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                hintText: '${state.password}',
-              ),
-              onChanged: (String value) {
-                password = value;
-              },
+          TextField(
+            style: TextStyle(
+              fontSize: 20.0,
             ),
+            maxLines: 1,
+            textAlignVertical: TextAlignVertical.top,
+            textAlign: TextAlign.center,
+            decoration: InputDecoration(
+              hintText: '${state.password}',
+            ),
+            onChanged: (String value) {
+              password = value;
+            },
           ),
           Container(
-            height: MediaQuery.of(context).size.height * 0.05,
+            height: MediaQuery.of(context).size.height * (isLandscape ? 0.06 : 0.05),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -712,3 +612,17 @@ refreshOtherSetting(BuildContext context) async {
   await context.read<SettingsCubit>().getSDCardInfo();
   await context.read<SettingsCubit>().getBatteryInfo();
 }
+
+void PortraitLock(BuildContext context) {
+  if ((MediaQuery.of(context).size.height < 600) || (MediaQuery.of(context).size.width < 600)) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  }
+}
+//
+// bool _keyboardIsVisible() {
+//   var currentScreenSize = getSafeAreaSize(MediaQuery.of(context));
+//   return widget.sizeOfParentWidget.height < currentScreenSize.height;
+// }

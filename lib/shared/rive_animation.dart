@@ -20,23 +20,22 @@ class _RiveAnimationState extends State<RiveAnimation> {
   // loads a Rive file
   void _loadRiveFile() async {
     final bytes = await rootBundle.load(riveFileName);
-    final file = RiveFile.import(bytes);
+    final file = await RiveFile.import(bytes);
 
-     if (file != null) {
-      // Select an animation by its name
-      setState(() => _artboard = file.mainArtboard
+    // if (RiveFile.import(bytes) != null) {
+    // Select an animation by its name
+    setState(
+      () => _artboard = file.mainArtboard
         ..addController(
           SimpleAnimation('rotate'),
-        ),);
-     }
+        ),
+    );
+    //}
   }
 
   /// Show the rive file, when loaded
   @override
   Widget build(BuildContext context) {
-    return _artboard != null  ? Rive(
-            artboard: _artboard,
-            fit: BoxFit.cover
-          ) : Container();
+    return _artboard != null ? Rive(artboard: _artboard, fit: BoxFit.cover) : Container();
   }
 }

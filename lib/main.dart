@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iot_logger/cubits/sensor_cubit.dart/sensor_cubit.dart';
@@ -30,11 +29,10 @@ void main() {
       providers: [
         BlocProvider(create: (context) => SensorCubit(arduinoRepo)..connect()),
         BlocProvider(create: (context) => FilesCubit(arduinoRepo)..getFiles()),
-        BlocProvider(
-            create: (context) => SettingsCubit(arduinoRepo)..getAllSettings()),
+        BlocProvider(create: (context) => SettingsCubit(arduinoRepo)..getAllSettings()),
         BlocProvider(create: (context) => SensorReadingCubit(arduinoRepo)),
       ],
-      child:  IotLoggerApp(),
+      child: IotLoggerApp(),
     ),
   );
 }
@@ -46,78 +44,78 @@ class IotLoggerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'IoT Logger',
-        theme: ThemeData(
-          primaryColor: green,
-          focusColor: darkGreen,
-          accentColor: darkBlue,
-          backgroundColor: Colors.white,
-          buttonColor: green,
-          fontFamily: 'Montserrat',
-          textTheme: ThemeData.light().textTheme.copyWith(
-                headline1: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 48,
-                  fontWeight: FontWeight.bold,
-                ),
-                headline2: TextStyle(
-                  fontStyle: FontStyle.normal,
-                  fontSize: 12,
-                  color: Colors.white,
-                ),
-                headline3: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 25,
-                  color: darkBlue,
-                ),
-                headline4: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w600,
-                  color: darkBlue,
-                ),
-                headline5: TextStyle(
-                  color: darkBlue,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w500,
-                ),
-                headline6: TextStyle(
-                  color: darkGreen,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w600,
-                ),
-                bodyText1: TextStyle(
-                  color: darkGreen,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
-                bodyText2: TextStyle(
-                  color: darkBlue,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w600,
-                ),
-                // texts within icons
-                subtitle1: TextStyle(
-                  color: darkBlue,
-                  fontSize: 10,
-                ),
-                subtitle2: TextStyle(
-                  color: darkBlue,
-                  fontSize: 13,
-                  fontStyle: FontStyle.italic,
-                ),
+    return new MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'IoT Logger',
+      theme: ThemeData(
+        primaryColor: green,
+        focusColor: darkGreen,
+        accentColor: darkBlue,
+        backgroundColor: Colors.white,
+        buttonColor: green,
+        fontFamily: 'Montserrat',
+        textTheme: ThemeData.light().textTheme.copyWith(
+              headline1: const TextStyle(
+                color: Colors.white,
+                fontSize: 48,
+                fontWeight: FontWeight.bold,
               ),
-        ),
-        routes: {
-          '/': (ctx) => HomeScreen(),
-          '/sensor': (ctx) => SensorScreen(),
-          '/logs': (ctx) => LogsScreen(arduinoRepo),
-          '/readings': (ctx) => ReadingsScreen(),
-          '/graph-reading': (ctx) => GraphScreen(arduinoRepo.wifiName), // passing wifiName to find the correct graph file
-          '/settings': (ctx) => SettingsScreen(),
-          '/individual-sensor-screen': (ctx) => IndividualSensorScreen(),
-        },
-      );
+              headline2: TextStyle(
+                fontStyle: FontStyle.normal,
+                fontSize: 12,
+                color: Colors.white,
+              ),
+              headline3: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 25,
+                color: darkBlue,
+              ),
+              headline4: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w600,
+                color: darkBlue,
+              ),
+              headline5: TextStyle(
+                color: darkBlue,
+                fontSize: 22,
+                fontWeight: FontWeight.w500,
+              ),
+              headline6: TextStyle(
+                color: darkGreen,
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+              ),
+              bodyText1: TextStyle(
+                color: darkGreen,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+              bodyText2: TextStyle(
+                color: darkBlue,
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+              ),
+              // texts within icons
+              subtitle1: TextStyle(
+                color: darkBlue,
+                fontSize: 10,
+              ),
+              subtitle2: TextStyle(
+                color: darkBlue,
+                fontSize: 13,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+      ),
+      routes: {
+        '/': (ctx) => HomeScreen(),
+        '/sensor': (ctx) => SensorScreen(),
+        '/logs': (ctx) => LogsScreen(arduinoRepo),
+        '/readings': (ctx) => ReadingsScreen(),
+        '/graph-reading': (ctx) => GraphScreen(arduinoRepo.wifiName), // passing wifiName to find the correct graph file
+        '/settings': (ctx) => SettingsScreen(),
+        '/individual-sensor-screen': (ctx) => IndividualSensorScreen(),
+      },
+    );
   }
 }

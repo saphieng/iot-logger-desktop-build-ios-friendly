@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:iot_logger/cubits/files_cubit/files_cubit.dart';
 import 'package:iot_logger/cubits/sensor_reading_cubit/sensor_reading_cubit.dart';
 import '../widgets/graph_card_from_file.dart';
+import 'package:flutter/services.dart';
 
 class GraphScreen extends StatelessWidget {
   final String wifiName;
@@ -12,6 +13,7 @@ class GraphScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PortraitLock(context);
     Map arguments = ModalRoute.of(context).settings.arguments;
     String fileName = arguments['fileName'];
 
@@ -47,8 +49,7 @@ class GraphScreen extends StatelessWidget {
               type: MaterialType.transparency,
               child: BackButton(
                 onPressed: () => {
-                  if (ModalRoute.of(context).settings.name == "/readings")
-                    {BlocProvider.of<SensorReadingCubit>(context).closeTimer()},
+                  if (ModalRoute.of(context).settings.name == "/readings") {BlocProvider.of<SensorReadingCubit>(context).closeTimer()},
                   Navigator.pop(context),
                 },
                 color: Colors.white,
@@ -93,6 +94,8 @@ class GraphScreen extends StatelessWidget {
   }
 
   Widget pageContent(BuildContext context, String fileName) {
+    PortraitLock(context);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -124,20 +127,18 @@ class GraphScreen extends StatelessWidget {
   }
 
   Widget getSaphiLogo(BuildContext context) {
-    final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    PortraitLock(context);
+    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
           // color: Colors.red[40],s
           alignment: Alignment.center,
-          height:
-              MediaQuery.of(context).size.height * (isLandscape ? 0.1 : 0.15),
+          height: MediaQuery.of(context).size.height * (isLandscape ? 0.1 : 0.15),
           child: SvgPicture.asset(
             'assets/svgs/saphi-logo-white-text.svg',
-            width:
-                MediaQuery.of(context).size.height * (isLandscape ? 0.3 : 0.15),
+            width: MediaQuery.of(context).size.height * (isLandscape ? 0.3 : 0.15),
           ),
         ),
       ],
@@ -145,6 +146,7 @@ class GraphScreen extends StatelessWidget {
   }
 
   Widget showDeleteDialog(BuildContext context, String fileName) {
+    PortraitLock(context);
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(28.0),
@@ -191,5 +193,14 @@ class GraphScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+void PortraitLock(BuildContext context) {
+  if ((MediaQuery.of(context).size.height < 600) || (MediaQuery.of(context).size.width < 600)) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
   }
 }
