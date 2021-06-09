@@ -9,7 +9,7 @@ import '../shared/layout.dart';
 class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //PortraitLock(context);
+    PortraitLock(context);
     final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -411,7 +411,7 @@ class SettingsScreen extends StatelessWidget {
 
 // ignore: non_constant_identifier_names
 Widget SetLoggingPeriodDialog(BuildContext context, state) {
-  //PortraitLock(context);
+  PortraitLock(context);
   int loggingPeriod;
   bool loggingPeriodisInt = false;
   final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
@@ -422,14 +422,14 @@ Widget SetLoggingPeriodDialog(BuildContext context, state) {
       borderRadius: BorderRadius.circular(28.0),
     ),
     child: Container(
-      height: MediaQuery.of(context).size.height * (isLandscape ? 0.50 : 0.20),
+      height: MediaQuery.of(context).size.height * (isLandscape ? 0.50 : 0.30),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
             "Set Logging Period",
           ),
-       TextField(
+          TextField(
             style: TextStyle(
               fontSize: 20.0,
               color: loggingPeriodisInt ? Colors.red : Colors.black,
@@ -488,7 +488,7 @@ Widget SetLoggingPeriodDialog(BuildContext context, state) {
 
 // ignore: non_constant_identifier_names
 Widget SetWifiSSID(BuildContext context, state) {
-  //PortraitLock(context);
+  PortraitLock(context);
   String ssid;
   final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
   return Dialog(
@@ -549,7 +549,7 @@ Widget SetWifiSSID(BuildContext context, state) {
 
 // ignore: non_constant_identifier_names
 Widget SetWifiPassword(BuildContext context, state) {
-  //PortraitLock(context);
+  PortraitLock(context);
   String password;
   final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
   return Dialog(
@@ -577,7 +577,6 @@ Widget SetWifiPassword(BuildContext context, state) {
             onChanged: (String value) {
               password = value;
             },
-            keyboardType: TextInputType.visiblePassword,
           ),
           Container(
             height: MediaQuery.of(context).size.height * (isLandscape ? 0.06 : 0.05),
