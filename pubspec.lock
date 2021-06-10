@@ -379,7 +379,7 @@ packages:
       name: rive
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.12"
+    version: "0.7.13"
   sizer:
     dependency: "direct main"
     description:
@@ -482,7 +482,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.4"
+    version: "2.1.5"
   window_size:
     dependency: "direct main"
     description:
